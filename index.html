@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Multi-sided Dice</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+</head>
+<body ng-controller="RollerController">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Raon</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li class="dropdown active">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">Apps</li>
+                <li><a href="/al-bhed">Al Bhed Translator</a></li>
+                <li><a href="/ez-budget">Easy Budget</a></li>
+                <li><a href="/dice-app">Dice App</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Games</li>
+                <li><a href="/click-quest">Click Quest</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+    <main class="container" style="padding-top: 50px;">
+        <h2>Multi-sided, Multiple die roll simulator</h2>
+        <form role="form" class="form-inline">
+            <div class="form-group">
+                <input type="number" class="form-control" ng-model="numberOfDice"><span>d</span><input type="number" class="form-control" ng-model="numberOfSides">
+            </div>
+            <div class="form-group">
+                <button class="form-control" ng-click="CalculateRolls(numberOfDice, numberOfSides)">Simulate Rolls!</button>
+            </div>
+        </form>
+        <p ng-repeat="roll in output track by $index">You rolled a {{roll}}</p>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+<script type="text/javascript">
+    function RollerController($scope) {
+        $scope.numberOfDice = 1;
+        $scope.numberOfSides = 2;
+        $scope.output = {}
+
+        $scope.CalculateRolls = function(dice, sides){
+            for (i=0; i < dice; i++){
+                $scope.output[i] = Math.floor((Math.random()*sides)+1);
+            }
+        }
+    }
+</script>
+</body>
+</html>
